@@ -5,7 +5,6 @@ import './App.css';
 
 function App() {
   const [expression, setExpression] = useState("(a - b) ^ (c + d)")
-  const [convertedExpression, setConvertedExpression] = useState("")
   const [select, setSelect] = useState("infix")
   const canvasRef = useRef(null)
   const containerRef = useRef(null)
@@ -31,7 +30,6 @@ function App() {
 
     clearCanvas()
     setExpression("")
-    setConvertedExpression("")
     setSelect("infix")
   }
 
@@ -51,7 +49,6 @@ function App() {
         expr = expression.replace(/\s/g, '')
         break;
     }
-    setConvertedExpression(expr)
 
     var canvas = canvasRef.current
     var c = canvasRef.current.getContext('2d')
@@ -65,9 +62,6 @@ function App() {
       canvas.width = containerRef.current.offsetWidth
       drawTree(root, c)
     }
-    
-
-    
     
   }
   return (

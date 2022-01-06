@@ -111,14 +111,6 @@ function getSize(root) {
     return size;
 }
 
-function print_coords(root) {
-    if (null != root) {
-        print_coords(root.left)
-        console.log(root.value, root.x, root.y)
-        print_coords(root.right)
-    }
-}
-
 function setCoordinates(root) {
     var i = 0
     const OFFSET = 50
