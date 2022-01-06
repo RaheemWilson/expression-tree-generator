@@ -48,6 +48,7 @@ function App() {
         expr = prefixToPostfix(expression.replace(/\s/g, ''))
         break;
       default:
+        expr = expression.replace(/\s/g, '')
         break;
     }
     setConvertedExpression(expr)
