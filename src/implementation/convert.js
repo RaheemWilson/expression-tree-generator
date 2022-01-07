@@ -17,27 +17,25 @@ const isOperator = (char) => {
     return ['^', '-', '+', '/', '*'].includes(char)
 }
 
-// The main function to convert infix expression to postfix expression
+/**
+ * Converts an infix expression to postfix notation
+ * @param {string} expression 
+ * @returns infix expression 
+ */
+
 const infixToPostfix = expression => {
 
-    var st = []; //For stack operations
+    var st = []; 
     var result = "";
 
     for(let i = 0; i < expression.length; i++) {
         let char = expression[i];
-        // If the scanned character is
-        // an operand, add it to output string.
         if((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= '0' && char <= '9'))
             result += char;
 
-        // If the scanned character is an
-        // ‘(‘, push it to the stack.
         else if(char === '(')
             st.push('(');
 
-        // If the scanned character is an ‘)’,
-        // pop and to output string from the stack
-        // until an ‘(‘ is encountered.
         else if(char === ')') {
             while(st[st.length - 1] !== '(')
             {
@@ -47,7 +45,6 @@ const infixToPostfix = expression => {
             st.pop();
         }
 
-        //If an operator is scanned
         else {
             while(st.length !== 0 && precedence(expression[i]) <= precedence(st[st.length - 1])) {
                 result += st[st.length - 1];
@@ -57,7 +54,6 @@ const infixToPostfix = expression => {
         }
     }
 
-    // Pop all the remaining elements from the stack
     while(st.length !== 0) {
         result += st[st.length - 1];
         st.pop();
@@ -66,13 +62,16 @@ const infixToPostfix = expression => {
     return result
 }
 
-
+/**
+ * Converts prefix expression to postfix
+ * @param {string} expression 
+ * @returns postfix expression of the string entered
+ */
 const prefixToPostfix = (expression) => {
     var reversedExpr = expression.split("").reverse()
     var stack = []
-    console.log(reversedExpr)
+
     reversedExpr.forEach(char => {
-        console.log(stack)
         if((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= '0' && char <= '9')){
             stack.push(char);
         } else if(isOperator(char)) {
@@ -85,8 +84,7 @@ const prefixToPostfix = (expression) => {
             }
             expr += char
             stack.push(expr)
-        }
-
+        } 
         
     });
 

@@ -9,7 +9,7 @@ function Node(value) {
     this.isLeaf = () => this.right == null && this.left == null;
 
     this.drawEdge = function (context, x, y, left_way, resolve) {
-        context.strokeStyle = 'gray';
+        context.strokeStyle = '#334A61';
         context.beginPath()
         const x_y_ratio = Math.abs(this.y - y) / Math.abs(this.x - x)
         const w = radius * Math.sqrt(1 / (1 + Math.pow(x_y_ratio, 2)))
