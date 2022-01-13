@@ -3,6 +3,16 @@ import { infixToPostfix, prefixToPostfix } from './implementation/convert';
 import { drawTree, setCoordinates, constructTree } from './implementation/canvas'
 import './App.css';
 
+const Modal = () => {
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [expression, setExpression] = useState("(a - b) ^ (c + d)")
   const [select, setSelect] = useState("infix")
@@ -88,7 +98,7 @@ function App() {
               </select>
             </div>
             <div className='buttons'>
-              <button className='btn clear' onClick={handleReset}>Clear</button>
+              <button className='btn clear' onClick={handleReset} type='button'>Clear</button>
               <button className='btn' type="submit">Generate</button>
             </div>
           </form>
