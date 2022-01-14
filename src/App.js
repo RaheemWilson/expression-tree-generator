@@ -4,6 +4,7 @@ import { drawTree, setCoordinates, constructTree } from './implementation/canvas
 import './App.css';
 
 const Modal = () => {
+  
   return (
     <div className="modal">
       <div className="modal-content">

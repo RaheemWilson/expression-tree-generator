@@ -28,6 +28,8 @@ const infixToPostfix = expression => {
     var st = []; 
     var result = "";
 
+    console.log(expression)
+
     for(let i = 0; i < expression.length; i++) {
         let char = expression[i];
         if((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= '0' && char <= '9'))
@@ -52,6 +54,8 @@ const infixToPostfix = expression => {
             }
             st.push(char);
         }
+
+        console.log(st)
     }
 
     while(st.length !== 0) {
