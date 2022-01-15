@@ -1,14 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { infixToPostfix, prefixToPostfix } from './implementation/convert';
+import { infixToPostfix, prefixToPostfix, isValid } from './implementation/convert';
 import { drawTree, setCoordinates, constructTree } from './implementation/canvas'
+import errorImg from './assets/error.svg'
 import './App.css';
 
-const Modal = () => {
-  
+const Modal = props => {
   return (
     <div className="modal">
       <div className="modal-content">
-        
+        <img src={errorImg} alt="Error detected"/>
+          <h2>The expression you have entered seems invalid.</h2>
+        <div className="modal-details">
+          <p>Carefully review your expression to ensure:</p>
+          <ul>
+            <li>Only valid operators are used - <br />['^', '*', '/', '+', '-'].</li>
+            <li>Only alphanumeric characters are used as operands - only single digits should be included in the mix.</li>
+            <li>The type of expression matches the option in the list provided.</li>
+            <li>Only use '(' , ')' as brackets.</li>
+          </ul>
+        </div>
+          <button onClick={props.closeModal} className='btn close'>Ok</button>
       </div>
     </div>
   )
@@ -16,6 +27,7 @@ const Modal = () => {
 
 function App() {
   const [expression, setExpression] = useState("(a - b) ^ (c + d)")
+  const [showModal, setShowModal] = useState(false)
   const [select, setSelect] = useState("infix")
   const canvasRef = useRef(null)
   const containerRef = useRef(null)
@@ -44,6 +56,10 @@ function App() {
     setSelect("infix")
   }
 
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
   const handleSubmit = (event) =>{
     if(event){
       event.preventDefault();
@@ -57,7 +73,7 @@ function App() {
         expr = prefixToPostfix(expression.replace(/\s/g, ''))
         break;
       default:
-        expr = expression.replace(/\s/g, '')
+        expr = !isValid(expression) ? "Not Valid": expression.replace(/\s/g, '')
         break;
     }
 
@@ -73,6 +89,9 @@ function App() {
       canvas.width = containerRef.current.offsetWidth
       drawTree(root, c)
     }
+    else {
+      setShowModal(true)
+    }
     
   }
   return (
@@ -80,6 +99,7 @@ function App() {
       <div className='header'>
         <h1>Expression Tree Generator</h1>
         <div>
+          { showModal ? <Modal closeModal={closeModal} /> : <></> }
           <form onSubmit={handleSubmit}>
             <div className='fields'>
               <input 
