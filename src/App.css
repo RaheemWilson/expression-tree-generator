@@ -2,10 +2,11 @@
 
 .App {
   text-align: center;
+  
 }
 
 .header{
-  background: url('./assets/bg-1.png') no-repeat;
+  background: rgba(187, 206, 225, .5) url('./assets/bg-1.png') no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -74,7 +75,6 @@ input:focus, select:focus{
   display: block;
   margin: auto;
   height: auto;
-  background: rgba(187, 206, 225, .5);
 }
 
 canvas {
