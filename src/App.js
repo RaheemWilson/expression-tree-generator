@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { infixToPostfix, prefixToPostfix, isValid } from './implementation/convert';
+import { infixToPostfix, prefixToPostfix, isValidPostfix,  } from './implementation/convert';
 import { drawTree, setCoordinates, constructTree } from './implementation/canvas'
 import errorImg from './assets/error.svg'
 import './App.css';
@@ -73,7 +73,7 @@ function App() {
         expr = prefixToPostfix(expression.replace(/\s/g, ''))
         break;
       default:
-        expr = !isValid(expression) ? "Not Valid": expression.replace(/\s/g, '')
+        expr = !isValidPostfix(expression) ? "Not Valid": expression.replace(/\s/g, '')
         break;
     }
 

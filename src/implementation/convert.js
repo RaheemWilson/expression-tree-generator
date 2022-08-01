@@ -22,6 +22,28 @@ const isValid = (expression) => {
     return expression.match(regex)
 }
 
+// write function to check if expression is a valid postfix expression
+const isValidPostfix = expression => {
+    if(!isValid(expression)) { return false }
+
+    let counter = 0
+    for (let i = 0; i < expression.length; i++) {
+        let char = expression[i]
+        if (isOperator(char)) {
+            if (counter < 2) {
+                return false
+            }
+            counter -= 1
+        } else {
+            counter += 1
+        }
+
+    }
+
+    return counter === 1
+}
+
+
 /**
  * Converts an infix expression to postfix notation
  * @param {string} expression 
@@ -61,7 +83,6 @@ const infixToPostfix = expression => {
                 st.push(char);
             }
     
-            console.log(st)
         }
     
         while(st.length !== 0) {
@@ -105,4 +126,4 @@ const prefixToPostfix = (expression) => {
     return stack.length > 1 ? 'Not Valid' : stack.join('')
 }
 
-export { infixToPostfix, prefixToPostfix, isValid }
+export { infixToPostfix, prefixToPostfix, isValid, isValidPostfix }
